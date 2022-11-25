@@ -20,11 +20,12 @@ module.exports = function(app, shopData) {
     app.get('/list', function(req, res) {
         let sqlquery = "SELECT * FROM books"; // query database to get all the books
         // execute sql query
-        db.query(sqlquery, (err, result) => { if (err) {
+         db.query(sqlquery, (err, result) => { if (err) {
                 res.redirect('./');
             }
-            let newData = Object.assign({}, shopData, {availableBooks:result}); console.log(newData)
-            res.render("list.ejs", newData)
+            console.log(result)
+            let newData = Object.assign({}, shopData, {availableBooks:result}); console.log(newData['shopName'])
+            res.render("list", shopData)
          });
     });                                                                                            
     app.post('/registered', function (req,res) {
